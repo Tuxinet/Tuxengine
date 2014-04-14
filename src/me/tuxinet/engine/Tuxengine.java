@@ -7,7 +7,7 @@
 package me.tuxinet.engine;
 
 /**
- * Testing the commit
+ * Testing the power of commit
  * @author Trym
  */
 public class Tuxengine {
