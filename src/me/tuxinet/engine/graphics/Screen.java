@@ -26,7 +26,17 @@ public class Screen {
     
     public void clear() {
         for (int i = 0; i < pixels.length; i++) {
-            pixels[i] = i + random.nextInt();
+            pixels[i] = 0;
+        }
+    }
+    
+    public void drawRect(int x, int y, int size) {
+        for (int x1 = 0; x1 < size; x1++) {
+            for (int y1 = 0; y1 < size; y1++) {
+                if (x + x1 > width) break;
+                if (y + y1 > width) break;
+                pixels[x + x1 + y + y1 * width] = 0xffffff;
+            }
         }
     }
 }

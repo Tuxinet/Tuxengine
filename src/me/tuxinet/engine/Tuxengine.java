@@ -7,7 +7,6 @@
 package me.tuxinet.engine;
 
 import java.awt.Canvas;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
@@ -25,6 +24,8 @@ public class Tuxengine extends Canvas implements Runnable {
     public static int width = 300;
     public static int height = width /16 * 9;
     public static int scale = 3;
+    public static int x = 0;
+    public static int y = 0;
     public static String title = "Rain";
     private Thread thread;
     private JFrame frame;
@@ -55,8 +56,7 @@ public class Tuxengine extends Canvas implements Runnable {
         try {
             thread.join();
         } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+         }
     }
     
     @Override
@@ -103,6 +103,7 @@ public class Tuxengine extends Canvas implements Runnable {
         }        
         
         screen.clear();
+        screen.drawRect(x, y, 16);
         
         for (int i = 0; i < pixels.length; i++) {
             pixels[i] = screen.pixels[i];
