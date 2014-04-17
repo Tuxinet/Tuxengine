@@ -34,8 +34,10 @@ public class Screen {
         for (int x1 = 0; x1 < size; x1++) {
             for (int y1 = 0; y1 < size; y1++) {
                 if (x + x1 > width) break;
-                if (y + y1 > width) break;
-                pixels[x + x1 + y + y1 * width] = 0xffffff;
+                if (y + y1 > height) break;
+                if (x + x1 < 0) break;
+                if (y + y1 < 0) break;
+                pixels[(x + x1) + (y1 * width) + (y * width)] = 0xffffff;
             }
         }
     }

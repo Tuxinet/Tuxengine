@@ -14,6 +14,7 @@ import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 import javax.swing.JFrame;
 import me.tuxinet.engine.graphics.Screen;
+import me.tuxinet.engine.input.Keyboard;
 /**
  * 
  * @author Trym
@@ -27,11 +28,13 @@ public class Tuxengine extends Canvas implements Runnable {
     public static int x = 0;
     public static int y = 0;
     public static String title = "Rain";
+    
     private Thread thread;
     private JFrame frame;
+    private Keyboard key;
     private boolean running = false;
-    
     private Screen screen;
+    
     
     private BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
     private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
@@ -42,6 +45,7 @@ public class Tuxengine extends Canvas implements Runnable {
         
         screen = new Screen(width, height);
         frame = new JFrame();
+        key = new Keyboard();
         
     } 
 
@@ -49,6 +53,7 @@ public class Tuxengine extends Canvas implements Runnable {
         running = true;
         thread = new Thread(this, "Display");
         thread.start();
+        addKeyListener(key);
     }
     
     public synchronized void stop() {
@@ -92,7 +97,11 @@ public class Tuxengine extends Canvas implements Runnable {
     }
     
     public void tick() {
-        
+        key.update();
+        if (key.up) y--;
+        if (key.down) y++;
+        if (key.left) x--;
+        if (key.right) x++;
     }
     
     public void render() {
